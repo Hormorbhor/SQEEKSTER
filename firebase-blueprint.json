@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "userProfile": {
+      "title": "User Profile",
+      "description": "Registered player profile with wallet address, username, Twitter handle, daily streak, and Squeek XP.",
+      "type": "object",
+      "properties": {
+        "walletAddress": { "type": "string", "description": "Lowercased Ethereum wallet address" },
+        "username": { "type": "string", "description": "Display username", "maxLength": 50 },
+        "twitterHandle": { "type": "string", "description": "Twitter/X handle without or with @ symbol", "maxLength": 50 },
+        "bio": { "type": "string", "description": "Player bio or slogan", "maxLength": 200 },
+        "avatarIcon": { "type": "string", "description": "Chosen hamster avatar emoji" },
+        "highScore": { "type": "number", "description": "Highest score achieved in maze" },
+        "levelsCleared": { "type": "number", "description": "Total levels cleared" },
+        "totalEthEarned": { "type": "number", "description": "Total ETH earned" },
+        "currentStreak": { "type": "number", "description": "Consecutive days of active playing or racing" },
+        "lastActiveDate": { "type": "string", "description": "ISO date string YYYY-MM-DD of last activity" },
+        "squeekXP": { "type": "number", "description": "Accumulated Squeek XP experience points" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["walletAddress", "username"]
+    },
+    "leaderboardRecord": {
+      "title": "Leaderboard Record",
+      "description": "Real-time game level clear and high score records.",
+      "type": "object",
+      "properties": {
+        "playerAddress": { "type": "string", "description": "Ethereum wallet address" },
+        "username": { "type": "string", "description": "Player display name" },
+        "twitterHandle": { "type": "string", "description": "Twitter/X handle" },
+        "levelName": { "type": "string", "description": "Maze level name" },
+        "timeSeconds": { "type": "number", "description": "Clear time in seconds" },
+        "score": { "type": "number", "description": "Game score points" },
+        "earningsETH": { "type": "number", "description": "ETH earned" },
+        "squeekXP": { "type": "number", "description": "Squeek XP earned" },
+        "verifiedWallet": { "type": "boolean", "description": "Verified Web3 Rabby signature" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["playerAddress", "score"]
+    }
+  },
+  "firestore": {
+    "/profiles/{walletAddress}": {
+      "schema": "userProfile",
+      "description": "Registered player profile document indexed by wallet address"
+    },
+    "/leaderboard/{recordId}": {
+      "schema": "leaderboardRecord",
+      "description": "Live real-time leaderboard scores submitted by registered players"
+    }
+  }
+}

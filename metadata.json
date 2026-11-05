@@ -1,0 +1,6 @@
+{
+  "name": "Squeek Genesis - Dark Pixel Hamster Maze & Race Simulator",
+  "description": "Dark red pixel hamster maze game featuring Rabby Wallet & Ethereum Sepolia integration (Chain ID 11155111), smart contract betting lobbies, and 10-hamster race simulation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

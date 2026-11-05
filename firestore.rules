@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Player User Profiles collection
+    match /profiles/{walletAddress} {
+      allow read: if true;
+      allow create, update: if walletAddress is string 
+        && request.resource.data.walletAddress is string
+        && request.resource.data.username is string
+        && request.resource.data.username.size() > 0
+        && request.resource.data.username.size() <= 50;
+      allow delete: if false;
+    }
+
+    // Global Leaderboard Records collection
+    match /leaderboard/{recordId} {
+      allow read: if true;
+      allow create: if request.resource.data.playerAddress is string
+        && request.resource.data.score is number
+        && request.resource.data.score >= 0;
+      allow update, delete: if false;
+    }
+
+  }
+}
